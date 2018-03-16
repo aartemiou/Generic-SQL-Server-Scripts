@@ -2,9 +2,10 @@
 -- This T-SQL script helps you retrieve useful 
 -- information about SQL Server instances.
 */
-SELECT @@VERSION
 SELECT
 SERVERPROPERTY('ServerName') AS FullInstanceName,
+(SELECT ISNULL(local_net_address,'N/A') FROM sys.dm_exec_connections WHERE session_id = @@SPID) AS SQLServerIP,
+(SELECT ISNULL(CAST(local_tcp_port AS VARCHAR(10)),'N/A') FROM sys.dm_exec_connections WHERE session_id = @@SPID) AS SQLServerPort,
 REPLACE(SUBSTRING(@@version,0,CHARINDEX('(',@@version)),'Microsoft ','') as FullSQLVersion,
 SERVERPROPERTY('ProductVersion') AS ProductVersion,
 SERVERPROPERTY('ProductLevel') AS ProductLevel,
