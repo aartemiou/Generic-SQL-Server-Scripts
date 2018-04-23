@@ -23,6 +23,6 @@ SELECT name AS DatabaseName,
 		ELSE 'Unknown - '+CONVERT(varchar(10),compatibility_level)
 	END AS CompatibilityLevelVersion,
 	CASE WHEN DATABASEPROPERTYEX(name, 'IsAutoShrink')=1 THEN 'Enabled'
-		WHEN DATABASEPROPERTYEX(name, 'IsAutoShrink')=0 THEN 'Dissabled'
+		WHEN DATABASEPROPERTYEX(name, 'IsAutoShrink')=0 THEN 'Disabled'
 	END AS AutoShrink
 FROM sys.databases
